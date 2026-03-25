@@ -1,0 +1,542 @@
+[
+  {
+    "id": "curso-001",
+    "titulo": "Fundamentos da Saúde Sexual e Reprodutiva (SSR)",
+    "categoria": "Saúde Geral",
+    "publico_alvo": "Público geral, estudantes e profissionais de saúde",
+    "descricao": "Uma visão abrangente sobre o conceito de saúde da OMS, os determinantes sociais e os direitos fundamentais que regem a sexualidade e a reprodução humana.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Conceito de Saúde e Determinantes Sociais",
+        "licoes": [
+          "Definição de Saúde (OMS): Bem-estar físico, mental e social",
+          "Determinantes Sociais da Saúde (DSS): Fatores econômicos, culturais e ambientais",
+          "A Saúde Sexual e Reprodutiva como Direito Humano"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Sexualidade vs. Reprodução",
+        "licoes": [
+          "Diferenças biológicas e sociais entre sexo e gênero",
+          "A sexualidade como fonte de prazer, afeto e identidade",
+          "O sistema reprodutor e suas funções"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Direitos Sexuais e Reprodutivos",
+        "licoes": [
+          "Capacidade de desfrutar de uma vida sexual segura e prazerosa",
+          "Direito ao consentimento e à livre expressão da orientação sexual",
+          "Liberdade de decidir sobre a maternidade e paternidade"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-002",
+    "titulo": "Gestão da Higiene Menstrual e Combate à Pobreza Menstrual",
+    "categoria": "Higiene e Dignidade",
+    "publico_alvo": "Raparigas, mulheres, educadores e decisores políticos",
+    "descricao": "Explora a importância da consciencialização sobre o ciclo menstrual, o acesso a produtos de higiene e o impacto da pobreza menstrual na educação e saúde.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "O Ciclo Menstrual e a Gestão da Higiene (GHM)",
+        "licoes": [
+          "O que é a Gestão da Higiene Menstrual?",
+          "Uso de materiais limpos, privacidade e acesso a água e sabão",
+          "Mitos, tabus e estigmas sociais sobre a menstruação"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Pobreza Menstrual: Um Problema de Saúde Pública",
+        "licoes": [
+          "Componentes: Falta de produtos, infraestruturas e conhecimento",
+          "Impacto no absentismo e abandono escolar",
+          "Riscos à saúde: Infeções urinárias e vaginais por materiais improvisados"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Consciencialização e Soluções",
+        "licoes": [
+          "Educação menstrual nas escolas",
+          "Políticas públicas para distribuição de pensos e infraestrutura sanitária",
+          "O papel da comunidade na quebra do silêncio"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-003",
+    "titulo": "Planeamento Reprodutivo e Métodos Contraceptivos",
+    "categoria": "Saúde Reprodutiva",
+    "publico_alvo": "Público jovem e adulto, casais",
+    "descricao": "Guia detalhado sobre métodos contraceptivos disponíveis, eficácia e a importância da dupla proteção contra gravidez indesejada e ISTs.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Introdução ao Planeamento Reprodutivo",
+        "licoes": [
+          "Planeamento Reprodutivo vs. Controle de Natalidade",
+          "O direito à escolha informada e voluntária",
+          "A importância da consulta pré-concepcional"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Métodos Reversíveis e Eficácia",
+        "licoes": [
+          "Métodos Hormonais: Pílulas, injetáveis e implantes",
+          "Dispositivos Intrauterinos (DIU de cobre e hormonal)",
+          "Métodos de Barreira e a Dupla Proteção (Camisinha masculina e feminina)"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Situações Especiais e Emergência",
+        "licoes": [
+          "Contracepção Oral de Emergência: Quando e como usar",
+          "Métodos definitivos: Laqueadura e Vasectomia",
+          "Contracepção na adolescência e pós-parto"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-004",
+    "titulo": "Saúde Inclusiva: Diversidade e Acessibilidade",
+    "categoria": "Inclusão Social",
+    "publico_alvo": "Profissionais de saúde, gestores públicos e sociedade civil",
+    "descricao": "Curso focado na eliminação de barreiras no acesso à saúde para grupos vulneráveis, incluindo pessoas com deficiência e a população LGBT+.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Diversidade e Grupos Prioritários",
+        "licoes": [
+          "Grupos de diversidade: Etnia, gênero, idade e orientação sexual",
+          "Combate ao Capacitismo na saúde",
+          "Saúde Integral da população negra e indígena"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Acessibilidade Física e Digital",
+        "licoes": [
+          "Adaptação de edifícios e sinalização (rampas e acessos)",
+          "Comunicação clara: Libras, Braille e tecnologias assistivas",
+          "Eliminação de atitudes discriminatórias no atendimento"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Saúde Sexual de Pessoas com Deficiência",
+        "licoes": [
+          "Mitos sobre a assexualidade de pessoas com deficiência",
+          "Autonomia e direito ao prazer e à reprodução",
+          "Prevenção de abusos e violência sexual"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-005",
+    "titulo": "Prevenção e Enfrentamento à Violência Sexual",
+    "categoria": "Direitos e Proteção",
+    "publico_alvo": "Profissionais de saúde, assistentes sociais e público geral",
+    "descricao": "Capacitação para identificar, acolher e notificar casos de violência doméstica e sexual, focando no atendimento humanizado.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Conceitos e Tipos de Violência",
+        "licoes": [
+          "Violência Física, Psicológica e Sexual",
+          "Abuso sexual em crianças e adolescentes",
+          "A Lei Maria da Penha e Marcos Legais"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Atendimento e Acolhimento à Vítima",
+        "licoes": [
+          "Postura ética e sigilo profissional",
+          "Profilaxia pós-exposição (HIV e ISTs) e anticoncepção de emergência",
+          "A importância da escuta qualificada sem julgamento"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Notificação e Redes de Proteção",
+        "licoes": [
+          "Fluxo de notificação compulsória (Sinan)",
+          "Articulação com Conselhos Tutelares e Defensoria Pública",
+          "Criação de redes de apoio e acolhimento municipal"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-006",
+    "titulo": "Saúde Sexual na Adolescência e Juventude",
+    "categoria": "Ciclos de Vida",
+    "publico_alvo": "Adolescentes, pais, professores e profissionais de saúde",
+    "descricao": "Aborda as transformações biológicas e psicossociais da puberdade, garantindo o direito à confidencialidade e ao atendimento ético para jovens.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Transformações e Descobertas",
+        "licoes": [
+          "Maturação sexual e mudanças corporais na puberdade",
+          "Construção da identidade sexual e de gênero",
+          "O conceito de 'ficar' e novos modelos de relacionamento"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Direitos e Ética no Atendimento",
+        "licoes": [
+          "O Estatuto da Criança e do Adolescente (ECA) e a saúde",
+          "Direito ao sigilo e privacidade (atendimento sem responsáveis)",
+          "Consentimento informado para o público jovem"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Prevenção e Riscos",
+        "licoes": [
+          "Vulnerabilidade às ISTs e HIV entre jovens",
+          "Gravidez na adolescência: Impactos e prevenção",
+          "Uso de álcool, drogas e a influência no comportamento sexual"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-007",
+    "titulo": "Saúde Sexual e Reprodutiva na Terceira Idade",
+    "categoria": "Ciclos de Vida",
+    "publico_alvo": "Idosos, cuidadores e profissionais de saúde",
+    "descricao": "Desmistifica tabus sobre a sexualidade no envelhecimento, abordando mudanças fisiológicas e a prevenção de doenças nesta fase da vida.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Sexualidade e Envelhecimento",
+        "licoes": [
+          "Diferença entre reprodução e desejo na terceira idade",
+          "Impacto do preconceito social na vida sexual do idoso",
+          "A importância do afeto e do carinho"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Mudanças Fisiológicas e Disfunções",
+        "licoes": [
+          "Menopausa e Climatério: Mitos e cuidados",
+          "Disfunção Erétil e saúde cardiovascular",
+          "Dispareunia (dor na relação) e atrofia urogenital"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Prevenção de ISTs em Idosos",
+        "licoes": [
+          "O crescimento da epidemia de HIV/Aids na terceira idade",
+          "Práticas de sexo seguro após a menopausa",
+          "Acompanhamento sorológico e clínico regular"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-008",
+    "titulo": "Apoio à Concepção e Infertilidade",
+    "categoria": "Saúde Reprodutiva",
+    "publico_alvo": "Casais e pessoas que desejam engravidar",
+    "descricao": "Orientações sobre o planejamento de uma gravidez saudável e o diagnóstico inicial de problemas de fertilidade.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Consulta Pré-concepcional",
+        "licoes": [
+          "Identificação de riscos e suplementação de ácido fólico",
+          "Vacinação e exames laboratoriais essenciais",
+          "Gestão de doenças crônicas antes da gravidez (Diabetes e Hipertensão)"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Compreendendo a Infertilidade",
+        "licoes": [
+          "Definição de infertilidade primária e secundária",
+          "Causas masculinas: O exame de espermograma",
+          "Causas femininas: Fatores anatômicos e hormonais"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Caminhos para o Tratamento",
+        "licoes": [
+          "Quando buscar um serviço de alta complexidade",
+          "Impacto psicológico da dificuldade em conceber",
+          "Estilo de vida e fertilidade (fumo, peso e estresse)"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-009",
+    "titulo": "Humanização e Ética no Atendimento em SSR",
+    "categoria": "Capacitação Profissional",
+    "publico_alvo": "Estudantes, enfermeiros, médicos e técnicos de saúde",
+    "descricao": "Foca no acolhimento e na postura ética necessária para lidar com temas sensíveis da sexualidade humana na atenção primária.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Princípios da Bioética",
+        "licoes": [
+          "Autonomia, Beneficência, Não-maleficência e Justiça",
+          "O direito ao sigilo profissional e suas exceções legais",
+          "Escuta qualificada: Ouvir antes de prescrever"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Abordagem Centrada na Pessoa",
+        "licoes": [
+          "Superação de preconceitos e julgamentos morais",
+          "Transferência e Contratransferência na relação profissional-paciente",
+          "Lidando com a diversidade cultural e religiosa"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Estratégias Educativas",
+        "licoes": [
+          "Metodologias participativas em grupos de saúde",
+          "Como abordar temas polêmicos (masturbação, parafilias)",
+          "Promoção do autocuidado e empoderamento do usuário"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-010",
+    "titulo": "SSR em Contextos de Vulnerabilidade Específica",
+    "categoria": "Inclusão e Direitos",
+    "publico_alvo": "Assistentes sociais, gestores e profissionais de saúde",
+    "descricao": "Estratégias de saúde para populações marginalizadas, incluindo profissionais do sexo e pessoas em situação de prisão.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Profissionais do Sexo",
+        "licoes": [
+          "Diferença entre Prostituição e Exploração Sexual",
+          "Redução de danos e prevenção de agravos no trabalho",
+          "Combate ao estigma institucional nos serviços de saúde"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "População em Privação de Liberdade",
+        "licoes": [
+          "O Plano Nacional de Saúde no Sistema Penitenciário",
+          "Visita íntima e saúde reprodutiva no cárcere",
+          "Controle de doenças infectocontagiosas (HIV e Tuberculose)"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Intersetorialidade e Acesso",
+        "licoes": [
+          "Articulação entre Saúde, Justiça e Segurança",
+          "Criação de fluxos de atendimento sem barreiras",
+          "Garantia da dignidade humana e direitos fundamentais"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-011",
+    "titulo": "Desenvolvimento da Sexualidade na Infância",
+    "categoria": "Educação e Psicologia",
+    "publico_alvo": "Pais, cuidadores e profissionais da educação e saúde",
+    "descricao": "Explora as fases do desenvolvimento psicossexual infantil, desde a vida intrauterina até a puberdade, orientando como lidar com curiosidades e comportamentos naturais.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "As Fases do Desenvolvimento Psicossexual",
+        "licoes": [
+          "A teoria de Freud: Fases oral, anal e fálica",
+          "O período de latência e a fase genital",
+          "O papel dos objetos transicionais no desenvolvimento"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Curiosidade e Descoberta do Corpo",
+        "licoes": [
+          "Perguntas comuns: 'De onde vêm os bebês?'",
+          "Brincadeiras de gênero e exploração do corpo",
+          "Como responder de forma simples, clara e sem tabus"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Comportamentos Específicos",
+        "licoes": [
+          "Masturbação infantil: O que é natural e quando buscar ajuda",
+          "Identificação de sinais de abuso sexual",
+          "A influência das atitudes dos pais na identidade sexual da criança"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-012",
+    "titulo": "Disfunções Sexuais e Parafilias",
+    "categoria": "Saúde Clínica",
+    "publico_alvo": "Profissionais de saúde e adultos interessados",
+    "descricao": "Estudo do ciclo de resposta sexual humana e identificação das principais disfunções e comportamentos sexuais incomuns.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "O Ciclo da Resposta Sexual",
+        "licoes": [
+          "Fases: Desejo, Excitação, Orgasmo e Resolução",
+          "Mudanças físicas e emocionais em homens e mulheres",
+          "Fatores que influenciam a satisfação sexual"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Disfunções Sexuais Comuns",
+        "licoes": [
+          "Desejo sexual hipoativo e aversão sexual",
+          "Disfunção erétil e ejaculação precoce",
+          "Anorgasmia, vaginismo e dispareunia"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Parafilias e Comportamentos Desviantes",
+        "licoes": [
+          "Definição de Parafilias: Do exibicionismo ao voyeurismo",
+          "Quando o comportamento torna-se lesivo ou patológico",
+          "Abordagem clínica e orientações para tratamento"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-013",
+    "titulo": "Saúde Sexual e Reprodutiva para Pessoas com HIV/Aids",
+    "categoria": "Saúde e Direitos",
+    "publico_alvo": "Pessoas vivendo com HIV, parceiros e profissionais de saúde",
+    "descricao": "Orientações sobre o exercício da sexualidade, prevenção da transmissão e planejamento familiar seguro para soropositivos.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Vida Sexual e Prevenção",
+        "licoes": [
+          "O conceito de Dupla Proteção",
+          "Prevenção da reinfecção e de outras ISTs",
+          "Uso de antirretrovirais e carga viral indetectável"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Desejo Reprodutivo e Maternidade",
+        "licoes": [
+          "Direito reprodutivo e desejo de ter filhos",
+          "Redução da Transmissão Vertical (da mãe para o bebê)",
+          "Acompanhamento pré-natal especializado para gestantes HIV+"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Aconselhamento e Ética",
+        "licoes": [
+          "Combate ao estigma e discriminação nos serviços de saúde",
+          "Sigilo profissional e revelação do diagnóstico ao parceiro",
+          "Saúde mental e qualidade de vida"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-014",
+    "titulo": "Saúde Sexual e Reprodutiva em Comunidades Indígenas",
+    "categoria": "Saúde Intercultural",
+    "publico_alvo": "Equipes multidisciplinares de saúde indígena (DSEI) e gestores",
+    "descricao": "Aborda as especificidades culturais, mitos e práticas de reprodução dos povos indígenas, focando na competência cultural do atendimento.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Cultura, Corpo e Sexualidade",
+        "licoes": [
+          "Concepções tradicionais sobre fluidos corporais e ciclo vital",
+          "Ritos de iniciação e transição para a vida adulta",
+          "Mitos e tabus sobre menstruação e parto na cultura indígena"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Desafios Reprodutivos",
+        "licoes": [
+          "Padrões de fecundidade e intervalo interpartal",
+          "Uso de ervas tradicionais vs. métodos modernos de contracepção",
+          "Prevenção de ISTs/Aids em áreas de fronteira e contato"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Atendimento Diferenciado",
+        "licoes": [
+          "O papel do Agente Indígena de Saúde (AIS)",
+          "Interpretação e tradução cultural no exame ginecológico",
+          "Respeito às práticas de cuidado com o recém-nascido e a placenta"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "curso-015",
+    "titulo": "Métodos Contraceptivos de Longa Duração e Barreira",
+    "categoria": "Saúde Reprodutiva",
+    "publico_alvo": "Mulheres em idade fértil e profissionais de saúde",
+    "descricao": "Um mergulho técnico e prático sobre os métodos mais eficazes e o uso correto de barreiras físicas para proteção integral.",
+    "modulos": [
+      {
+        "ordem": 1,
+        "titulo": "Dispositivos Intrauterinos (DIU)",
+        "licoes": [
+          "DIU de Cobre: Mecanismo de ação, inserção e mitos",
+          "Sistema Intrauterino (SIU) de Levonorgestrel (Hormonal)",
+          "Critérios de elegibilidade e manejo de efeitos colaterais"
+        ]
+      },
+      {
+        "ordem": 2,
+        "titulo": "Implantes e Métodos de Barreira",
+        "licoes": [
+          "Implantes Subcutâneos: Eficácia e duração",
+          "Diafragma: Técnica de medição e uso correto",
+          "Espermaticidas: Riscos e limitações"
+        ]
+      },
+      {
+        "ordem": 3,
+        "titulo": "Preservativos: Proteção Além da Gravidez",
+        "licoes": [
+          "Condom Masculino e Feminino: Diferenças e vantagens",
+          "Como lidar com a resistência ao uso do preservativo",
+          "Armazenamento e dicas para evitar rupturas"
+        ]
+      }
+    ]
+  }
+]
