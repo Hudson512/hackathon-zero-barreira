@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, X, BookOpen, Users, ChevronDown, ChevronUp, GraduationCap, Layers } from "lucide-react";
+import TextToSpeechButton from "./components/TextToSpeechButton";
 import cursosData from "../cursos.json";
 
 interface Licao {
@@ -50,19 +51,24 @@ function ModuloAccordion({ modulo, index }: { modulo: Modulo; index: number }) {
     <div className="border border-gray-100 rounded-2xl overflow-hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition-colors text-left"
+        aria-expanded={open}
+        aria-controls={`modulo-content-${modulo.ordem}`}
+        className="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition-colors text-left focus:ring-2 focus:ring-pink-500 focus:outline-none"
       >
         <div className="flex items-center gap-3">
-          <span className="w-7 h-7 rounded-full bg-black text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
+          <span className="w-7 h-7 rounded-full bg-black text-white text-xs font-bold flex items-center justify-center flex-shrink-0" aria-hidden="true">
             {modulo.ordem}
           </span>
           <span className="font-semibold text-sm text-gray-900">{modulo.titulo}</span>
         </div>
-        {open ? <ChevronUp className="w-4 h-4 text-gray-400 flex-shrink-0" /> : <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" />}
+        {open ? <ChevronUp className="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden="true" /> : <ChevronDown className="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden="true" />}
       </button>
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
+            id={`modulo-content-${modulo.ordem}`}
+            role="region"
+            aria-label={`Conteúdo do ${modulo.titulo}`}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -86,6 +92,8 @@ function ModuloAccordion({ modulo, index }: { modulo: Modulo; index: number }) {
 
 function CursoModal({ curso, onClose }: { curso: Curso; onClose: () => void }) {
   const style = getCategoryStyle(curso.categoria);
+  const textToRead = `${curso.titulo}. ${curso.descricao}. Público alvo: ${curso.publico_alvo}. Este curso possui ${curso.modulos.length} módulos.`;
+  
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
       <motion.div
@@ -100,6 +108,9 @@ function CursoModal({ curso, onClose }: { curso: Curso; onClose: () => void }) {
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.92, opacity: 0, y: 24 }}
         transition={{ type: "spring", damping: 26, stiffness: 300 }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
         className="relative bg-white w-full max-w-2xl rounded-[32px] overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
       >
         {/* Header */}
@@ -109,14 +120,18 @@ function CursoModal({ curso, onClose }: { curso: Curso; onClose: () => void }) {
               <span className={`w-1.5 h-1.5 rounded-full ${style.dot}`} />
               {curso.categoria}
             </span>
-            <button
-              onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors flex-shrink-0"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-2">
+              <TextToSpeechButton textToRead={textToRead} />
+              <button
+                onClick={onClose}
+                aria-label="Fechar detalhes do curso"
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors flex-shrink-0 focus:ring-2 focus:ring-gray-300 focus:outline-none"
+              >
+                <X className="w-5 h-5" aria-hidden="true" />
+              </button>
+            </div>
           </div>
-          <h2 className="text-2xl font-serif font-bold tracking-tight text-gray-900 mb-3 leading-tight">
+          <h2 id="modal-title" className="text-2xl font-serif font-bold tracking-tight text-gray-900 mb-3 leading-tight">
             {curso.titulo}
           </h2>
           <p className="text-sm text-gray-500 leading-relaxed">{curso.descricao}</p>
@@ -152,6 +167,7 @@ function CursoModal({ curso, onClose }: { curso: Curso; onClose: () => void }) {
 function CursoCard({ curso, onClick }: { curso: Curso; onClick: () => void }) {
   const style = getCategoryStyle(curso.categoria);
   const totalLicoes = curso.modulos.reduce((acc, m) => acc + m.licoes.length, 0);
+  const textToRead = `${curso.titulo}. Categoria: ${curso.categoria}. ${curso.descricao}. Com ${curso.modulos.length} módulos e ${totalLicoes} lições.`;
 
   return (
     <motion.div
@@ -160,7 +176,11 @@ function CursoCard({ curso, onClick }: { curso: Curso; onClick: () => void }) {
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5 }}
       onClick={onClick}
-      className="group bg-white border border-gray-100 rounded-[24px] p-6 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col gap-4"
+      className="group bg-white border border-gray-100 rounded-[24px] p-6 cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col gap-4 focus:ring-2 focus:ring-pink-500 focus:outline-none"
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && onClick()}
+      aria-label={`Ver detalhes do curso: ${curso.titulo}`}
     >
       {/* Category badge */}
       <div className="flex items-center justify-between">
@@ -168,7 +188,10 @@ function CursoCard({ curso, onClick }: { curso: Curso; onClick: () => void }) {
           <span className={`w-1.5 h-1.5 rounded-full ${style.dot}`} />
           {curso.categoria}
         </span>
-        <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-pink-500 group-hover:translate-x-1 transition-all" />
+        <div className="flex items-center gap-2">
+          <TextToSpeechButton textToRead={textToRead} />
+          <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-pink-500 group-hover:translate-x-1 transition-all" aria-hidden="true" />
+        </div>
       </div>
 
       {/* Title + desc */}

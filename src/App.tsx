@@ -46,7 +46,7 @@ function LandingPage() {
   const [isExploreModalOpen, setIsExploreModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#F5F5F7] text-[#1D1D1F] font-sans selection:bg-pink-100 scroll-smooth">
+    <main className="min-h-screen bg-[#F5F5F7] text-[#1D1D1F] font-sans selection:bg-pink-100 scroll-smooth">
       {/* Navigation */}
       
 
@@ -103,15 +103,19 @@ function LandingPage() {
           >
             <button 
               onClick={() => setIsPreOrderModalOpen(true)}
-              className="px-8 py-4 bg-black text-white rounded-full font-medium flex items-center gap-2 hover:scale-105 transition-transform group"
+              aria-expanded={isPreOrderModalOpen}
+              aria-haspopup="dialog"
+              className="px-8 py-4 bg-black text-white rounded-full font-medium flex items-center gap-2 hover:scale-105 transition-transform group focus:ring-2 focus:ring-offset-2 focus:ring-black focus:outline-none"
             >
-              Comprar Agora <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              Comprar Agora <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </button>
             <button 
               onClick={() => setIsExploreModalOpen(true)}
-              className="px-8 py-4 bg-white border border-black/10 rounded-full font-medium flex items-center gap-2 hover:bg-gray-50 transition-colors"
+              aria-expanded={isExploreModalOpen}
+              aria-haspopup="dialog"
+              className="px-8 py-4 bg-white border border-black/10 rounded-full font-medium flex items-center gap-2 hover:bg-gray-50 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 focus:outline-none"
             >
-              Explorar <ChevronDown className="w-4 h-4" />
+              Explorar <ChevronDown className="w-4 h-4" aria-hidden="true" />
             </button>
           </motion.div>
         </div>
@@ -294,7 +298,7 @@ function LandingPage() {
           </Modal>
         )}
       </AnimatePresence>
-    </div>
+    </main>
   );
 }
 
@@ -371,7 +375,7 @@ function BraceletSimulator() {
           </div>
 
           {/* Ring */}
-          <div className="relative w-36 h-36 md:w-44 md:h-44 flex items-center justify-center">
+          <div className="relative w-36 h-36 md:w-44 md:h-44 flex items-center justify-center" aria-hidden="true">
             <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 176 176">
               <circle cx="88" cy="88" r="80" stroke="currentColor" strokeWidth="2" fill="transparent" className="text-white/5" />
               <motion.circle
@@ -384,8 +388,9 @@ function BraceletSimulator() {
                 strokeLinecap="round"
               />
             </svg>
-            <div className="text-center">
-              <motion.span key={temp} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-3xl md:text-4xl font-serif font-black block">
+            <div className="text-center" aria-live="polite">
+              <span className="sr-only">Temperatura corporal atual:</span>
+              <motion.span key={temp} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-3xl md:text-4xl font-serif font-black block" aria-hidden="true">
                 {temp}°
               </motion.span>
               <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-[0.3em] opacity-40">Temp. Corporal</span>
@@ -493,9 +498,13 @@ function BraceletSimulator() {
               <span className="text-[8px] opacity-40 uppercase tracking-widest">BLE Live</span>
             </motion.div>
           </div>
+          
+          <div className="sr-only" aria-live="assertive">
+            {!isUrgent ? "Sem alertas críticos no momento." : "Atenção: Troca do absorvente recomendada!"}
+          </div>
 
           {/* Alerts List */}
-          <div className="flex flex-col gap-3 flex-1 overflow-auto">
+          <div className="flex flex-col gap-3 flex-1 overflow-auto" role="log" aria-live="polite">
             {/* Alert 1 - Pad Change */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -573,13 +582,14 @@ function BraceletSimulator() {
 
 function Modal({ children, onClose, title }: { children: React.ReactNode, onClose: () => void, title: string }) {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" aria-labelledby="modal-title" role="dialog" aria-modal="true">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        aria-hidden="true"
       />
       <motion.div 
         initial={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -588,9 +598,9 @@ function Modal({ children, onClose, title }: { children: React.ReactNode, onClos
         className="relative bg-white w-full max-w-lg rounded-[32px] overflow-hidden shadow-2xl"
       >
         <div className="p-8 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-          <h3 className="text-2xl font-serif font-bold tracking-tight">{title}</h3>
-          <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full transition-colors">
-            <X className="w-5 h-5" />
+          <h3 id="modal-title" className="text-2xl font-serif font-bold tracking-tight">{title}</h3>
+          <button onClick={onClose} aria-label="Fechar" className="p-2 hover:bg-gray-200 rounded-full transition-colors focus:ring-2 focus:ring-gray-300 focus:outline-none">
+            <X className="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
         <div className="p-8">

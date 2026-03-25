@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, BookOpen, ChevronRight, PlayCircle, Loader2, AlertCircle } from "lucide-react";
 import { motion } from "motion/react";
 import OpenAI from "openai";
+import TextToSpeechButton from "./components/TextToSpeechButton";
 
 import cursosData from "../cursos.json";
 
@@ -220,7 +221,7 @@ Formata a resposta em Markdown bem estruturado, utilizando títulos (##), listas
         
         {/* Sidebar (Modules) */}
         <aside className="w-80 bg-gray-50 border-r border-gray-100 flex flex-col hidden md:flex overflow-y-auto">
-          <div className="p-6">
+          <nav aria-label="Módulos da Sala de Aula" className="p-6">
             <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">
               Conteúdo do Curso
             </p>
@@ -257,11 +258,16 @@ Formata a resposta em Markdown bem estruturado, utilizando títulos (##), listas
                 );
               })}
             </div>
-          </div>
+          </nav>
         </aside>
 
         {/* Lesson Content Area */}
-        <main className="flex-1 bg-white overflow-y-auto w-full custom-scrollbar relative scroll-smooth">
+        <main id="main-content" className="flex-1 bg-white overflow-y-auto w-full custom-scrollbar relative scroll-smooth text-gray-900">
+          {/* Announcer for Screen Readers to avoid streaming spam */}
+          <div aria-live="polite" className="sr-only">
+            {!isGenerating && content.length > 0 ? "Conteúdo da aula gerado e pronto para leitura." : isGenerating ? "Gerando conteúdo da aula, aguarde..." : ""}
+          </div>
+
           <div className="max-w-3xl mx-auto px-6 py-12 md:py-20">
             
             {/* Header of the current module */}
@@ -271,11 +277,16 @@ Formata a resposta em Markdown bem estruturado, utilizando títulos (##), listas
               animate={{ opacity: 1, y: 0 }}
               className="mb-12"
             >
-              <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-tight leading-tight">
-                {curso.modulos[activeModuleIndex]?.titulo}
-              </h1>
+              <div className="flex justify-between items-start gap-4 mb-4">
+                <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 tracking-tight leading-tight">
+                  {curso.modulos[activeModuleIndex]?.titulo}
+                </h1>
+                {!isGenerating && content && (
+                  <TextToSpeechButton elementId="aula-content" />
+                )}
+              </div>
               <p className="text-lg text-gray-500 flex items-center gap-2">
-                Módulo {curso.modulos[activeModuleIndex]?.ordem} <ChevronRight className="w-4 h-4" /> {curso.titulo}
+                Módulo {curso.modulos[activeModuleIndex]?.ordem} <ChevronRight className="w-4 h-4" aria-hidden="true" /> {curso.titulo}
               </p>
             </motion.div>
 
@@ -288,7 +299,7 @@ Formata a resposta em Markdown bem estruturado, utilizando títulos (##), listas
             )}
 
             {/* AI Generated Content */}
-            <div className="prose prose-lg max-w-none prose-pink prose-headings:font-serif">
+            <div id="aula-content" className="prose prose-lg max-w-none prose-pink prose-headings:font-serif">
                {content ? (
                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                    {renderMarkdown(content)}
