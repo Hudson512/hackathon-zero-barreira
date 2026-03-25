@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import AprendizagemPage from "./AprendizagemPage";
+import SalaDeAulaPage from "./SalaDeAulaPage";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   ShoppingCart, ArrowRight, ChevronDown, ShieldCheck, Droplets, Leaf, Layers, Wind, Heart, 
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/bracelet-sim" element={<BraceletSimulator />} />
         <Route path="/aprender" element={<AprendizagemPage />} />
+        <Route path="/sala/:cursoId/:moduloIndex" element={<SalaDeAulaPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

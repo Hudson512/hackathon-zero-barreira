@@ -124,6 +124,15 @@ function CursoModal({ curso, onClose }: { curso: Curso; onClose: () => void }) {
             <Users className="w-3.5 h-3.5 text-gray-400" />
             <span className="text-xs text-gray-400">{curso.publico_alvo}</span>
           </div>
+          
+          <div className="mt-6 pt-6 border-t border-gray-100">
+            <Link 
+              to={`/sala/${curso.id}/0`}
+              className="w-full flex items-center justify-center gap-2 py-4 bg-gray-900 hover:bg-black text-white rounded-xl font-bold transition-all hover:scale-[1.02]"
+            >
+              Ir para Sala de Aula 🎓
+            </Link>
+          </div>
         </div>
 
         {/* Módulos scrollable */}
