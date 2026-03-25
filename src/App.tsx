@@ -1,13 +1,25 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { ShoppingCart, ArrowRight, ChevronDown, ShieldCheck, Droplets, Leaf, Layers, Wind, Heart, Cpu, Zap, Radio, Bell, AlertTriangle, X, Globe, MessageSquare, ExternalLink, Shield, BookOpen } from "lucide-react";
+import { 
+  ShoppingCart, ArrowRight, ChevronDown, ShieldCheck, Droplets, Leaf, Layers, Wind, Heart, 
+  Cpu, Zap, Radio, Bell, AlertTriangle, X, Globe, MessageSquare, ExternalLink, Shield, 
+  BookOpen, Thermometer, Activity, Calendar, ZapOff, RefreshCcw
+} from "lucide-react";
 
 export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/bracelet-sim" element={<BraceletSimulator />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+function LandingPage() {
   const [isPreOrderModalOpen, setIsPreOrderModalOpen] = useState(false);
   const [isExploreModalOpen, setIsExploreModalOpen] = useState(false);
 
@@ -260,6 +272,279 @@ export default function App() {
           </Modal>
         )}
       </AnimatePresence>
+    </div>
+  );
+}
+
+function BraceletSimulator() {
+  const [temp, setTemp] = useState(36.5);
+  const [pressure] = useState("12/8");
+  const [day] = useState(14);
+  const [timeLeft, setTimeLeft] = useState(4 * 60 * 60); // 4h in seconds
+  const [alertSent, setAlertSent] = useState(false);
+  const [alertPulsing, setAlertPulsing] = useState(false);
+
+  // Fluctuate temperature
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTemp(t => +(t + (Math.random() * 0.2 - 0.1)).toFixed(1));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Countdown timer
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(t => Math.max(0, t - 1));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const hours = Math.floor(timeLeft / 3600);
+  const minutes = Math.floor((timeLeft % 3600) / 60);
+  const seconds = timeLeft % 60;
+  const isUrgent = timeLeft < 60 * 60; // less than 1h
+
+  const handleSendAlert = () => {
+    setAlertPulsing(true);
+    setTimeout(() => {
+      setAlertSent(true);
+      setAlertPulsing(false);
+    }, 1500);
+  };
+
+  const handleSnooze = () => {
+    setTimeLeft(60 * 60); // snooze 1h
+    setAlertSent(false);
+  };
+
+  return (
+    <div className="h-screen overflow-hidden bg-[#0A0A0B] text-white font-sans flex flex-col">
+      {/* Glow effect background */}
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-pink-500/10 blur-[150px] rounded-full pointer-events-none" />
+
+      {/* Top bar */}
+      <div className="relative z-10 flex justify-between items-center px-8 py-4 border-b border-white/5">
+        <div className="flex items-center gap-3">
+          <motion.div animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-2 h-2 rounded-full bg-green-400" />
+          <span className="text-[10px] font-bold uppercase tracking-widest opacity-40">NDINGA OS v1.0 — Live Sync</span>
+        </div>
+        <Link to="/" className="text-white/30 hover:text-white/70 transition-colors text-[10px] uppercase tracking-widest flex items-center gap-2">
+          <ArrowRight className="w-3 h-3 rotate-180" /> Voltar ao Site
+        </Link>
+      </div>
+
+      {/* Main Grid */}
+      <div className="relative z-10 flex-1 grid grid-cols-3 gap-4 p-6 min-h-0">
+
+        {/* === Card 1: Device Vitals === */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-zinc-900/60 backdrop-blur-3xl border border-white/10 rounded-[36px] p-6 flex flex-col items-center justify-between"
+        >
+          <div className="w-full flex justify-between items-center text-[9px] font-bold uppercase tracking-widest opacity-30">
+            <span>Sinais Vitais</span>
+            <span>Monitorização</span>
+          </div>
+
+          {/* Ring */}
+          <div className="relative w-44 h-44 flex items-center justify-center">
+            <svg className="absolute inset-0 w-full h-full -rotate-90">
+              <circle cx="88" cy="88" r="80" stroke="currentColor" strokeWidth="2" fill="transparent" className="text-white/5" />
+              <motion.circle
+                cx="88" cy="88" r="80" stroke="currentColor" strokeWidth="7" fill="transparent"
+                strokeDasharray="502"
+                initial={{ strokeDashoffset: 502 }}
+                animate={{ strokeDashoffset: 502 - (502 * 0.65) }}
+                transition={{ duration: 2, ease: "easeOut" }}
+                className={isUrgent ? "text-red-400" : "text-pink-500"}
+                strokeLinecap="round"
+              />
+            </svg>
+            <div className="text-center">
+              <motion.span key={temp} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-4xl font-serif font-black block">
+                {temp}°
+              </motion.span>
+              <span className="text-[8px] font-bold uppercase tracking-[0.3em] opacity-40">Temp. Corporal</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 w-full">
+            <div className="bg-white/5 border border-white/5 p-3 rounded-2xl text-center">
+              <Activity className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+              <span className="text-lg font-bold block">{pressure}</span>
+              <span className="text-[7px] font-bold uppercase tracking-widest opacity-30">Pressão Art.</span>
+            </div>
+            <div className="bg-white/5 border border-white/5 p-3 rounded-2xl text-center">
+              <Calendar className="w-4 h-4 text-pink-400 mx-auto mb-1" />
+              <span className="text-lg font-bold block">{day}º Dia</span>
+              <span className="text-[7px] font-bold uppercase tracking-widest opacity-30">Ciclo</span>
+            </div>
+          </div>
+
+          <div className="w-full bg-pink-500/10 border border-pink-500/20 p-4 rounded-2xl flex gap-3 items-center">
+            <div className="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center animate-pulse flex-shrink-0">
+              <Heart className="w-3 h-3 text-white" />
+            </div>
+            <div>
+              <h4 className="text-xs font-bold">Fase Lútea</h4>
+              <p className="text-[9px] opacity-60">Pico de progesterona. Mantenha-se hidratada.</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* === Card 2: Pad Timer === */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className={`backdrop-blur-3xl border rounded-[36px] p-6 flex flex-col justify-between ${
+            isUrgent ? "bg-red-900/30 border-red-500/30" : "bg-zinc-900/50 border-white/10"
+          }`}
+        >
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className={`w-10 h-10 rounded-2xl flex items-center justify-center ${isUrgent ? "bg-red-500" : "bg-amber-500"}`}>
+                <Bell className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold">Troca do Absorvente</h3>
+                <p className="text-[9px] opacity-50">Temporizador de higiene ativo</p>
+              </div>
+              {isUrgent && (
+                <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 0.8, repeat: Infinity }} className="ml-auto w-3 h-3 rounded-full bg-red-400" />
+              )}
+            </div>
+          </div>
+
+          {/* Big Countdown */}
+          <div className="text-center flex-1 flex flex-col items-center justify-center gap-2">
+            <motion.span
+              key={`${hours}-${minutes}-${seconds}`}
+              className={`text-7xl font-serif font-black tracking-tight ${isUrgent ? "text-red-400" : "text-white"}`}
+            >
+              {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}
+            </motion.span>
+            <span className={`text-4xl font-serif font-bold opacity-40 ${isUrgent ? "text-red-300" : ""}`}>
+              :{String(seconds).padStart(2, "0")}
+            </span>
+            <p className="text-[9px] opacity-40 uppercase tracking-widest">Tempo Restante para Troca</p>
+          </div>
+
+          {/* Progress bar */}
+          <div className="w-full bg-white/5 rounded-full h-1.5 mb-4">
+            <motion.div
+              className={`h-full rounded-full ${isUrgent ? "bg-red-400" : "bg-amber-400"}`}
+              animate={{ width: `${(timeLeft / (4 * 3600)) * 100}%` }}
+              transition={{ duration: 0.5 }}
+            />
+          </div>
+
+          <button
+            onClick={handleSnooze}
+            className="w-full py-3 bg-white/5 border border-white/10 rounded-2xl text-xs font-bold hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+          >
+            <RefreshCcw className="w-3 h-3" /> Adiar 1 hora
+          </button>
+        </motion.div>
+
+        {/* === Card 3: Alerts Feed (Responsável) === */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-zinc-900/50 backdrop-blur-3xl border border-white/10 rounded-[36px] p-6 flex flex-col gap-4 overflow-hidden"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-indigo-500 flex items-center justify-center">
+                <Bell className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold">Notificações Recebidas</h3>
+                <p className="text-[9px] opacity-50">Pulseira NDINGA da utilizadora</p>
+              </div>
+            </div>
+            <motion.div animate={{ opacity: [1, 0.2, 1] }} transition={{ duration: 2, repeat: Infinity }} className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+              <span className="text-[8px] opacity-40 uppercase tracking-widest">BLE Live</span>
+            </motion.div>
+          </div>
+
+          {/* Alerts List */}
+          <div className="flex flex-col gap-3 flex-1 overflow-auto">
+            {/* Alert 1 - Pad Change */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex items-start gap-3 p-3 bg-amber-500/10 border border-amber-500/20 rounded-2xl"
+            >
+              <div className="w-8 h-8 rounded-xl bg-amber-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <RefreshCcw className="w-4 h-4 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-bold text-amber-300">Hora de Trocar o Absorvente</p>
+                <p className="text-[10px] opacity-50 mt-0.5">A utilizadora atingiu 4h de uso. Troca recomendada.</p>
+                <p className="text-[9px] opacity-30 mt-1">há 2 min · Pulseira #NDINGA-001</p>
+              </div>
+            </motion.div>
+
+            {/* Alert 2 - Temp */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.7 }}
+              className="flex items-start gap-3 p-3 bg-red-500/10 border border-red-500/20 rounded-2xl"
+            >
+              <div className="w-8 h-8 rounded-xl bg-red-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Thermometer className="w-4 h-4 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-bold text-red-300">Temperatura Elevada Detetada</p>
+                <p className="text-[10px] opacity-50 mt-0.5">Temp. corporal: 37.8°C. Pode indicar febre.</p>
+                <p className="text-[9px] opacity-30 mt-1">há 18 min · Pulseira #NDINGA-001</p>
+              </div>
+            </motion.div>
+
+            {/* Alert 3 - Emergency */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.9 }}
+              className="flex items-start gap-3 p-3 bg-pink-500/10 border border-pink-500/20 rounded-2xl"
+            >
+              <div className="w-8 h-8 rounded-xl bg-pink-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Heart className="w-4 h-4 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-bold text-pink-300">Início do Ciclo Menstrual</p>
+                <p className="text-[10px] opacity-50 mt-0.5">Dia 1 do novo ciclo detetado. Apoio recomendado.</p>
+                <p className="text-[9px] opacity-30 mt-1">há 2 horas · Pulseira #NDINGA-001</p>
+              </div>
+            </motion.div>
+
+            {/* Alert 4 - Info */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.1 }}
+              className="flex items-start gap-3 p-3 bg-white/5 border border-white/5 rounded-2xl"
+            >
+              <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Activity className="w-4 h-4 opacity-60" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-bold opacity-60">Sinais Vitais Normais</p>
+                <p className="text-[10px] opacity-30 mt-0.5">Pressão: 12/8 · Temp: 36.5°C. Tudo estável.</p>
+                <p className="text-[9px] opacity-20 mt-1">há 3 horas · Pulseira #NDINGA-001</p>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+      </div>
     </div>
   );
 }
