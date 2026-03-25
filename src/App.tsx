@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import AprendizagemPage from "./AprendizagemPage";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   ShoppingCart, ArrowRight, ChevronDown, ShieldCheck, Droplets, Leaf, Layers, Wind, Heart, 
@@ -13,6 +14,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/bracelet-sim" element={<BraceletSimulator />} />
+        <Route path="/aprender" element={<AprendizagemPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
@@ -644,6 +646,23 @@ function ExploreContent() {
 
   return (
     <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+      {/* CTA — Área de Aprendizagem */}
+      <Link
+        to="/aprender"
+        className="group flex items-center justify-between w-full p-5 bg-gradient-to-r from-pink-500 to-violet-600 text-white rounded-2xl hover:from-pink-600 hover:to-violet-700 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/20"
+      >
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+            <BookOpen className="w-5 h-5" />
+          </div>
+          <div className="text-left">
+            <p className="font-bold text-sm">Entrar na Área de Aprendizagem</p>
+            <p className="text-[11px] text-white/70">15 cursos sobre saúde e higiene menstrual</p>
+          </div>
+        </div>
+        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+      </Link>
+
       <p className="text-sm opacity-60 leading-relaxed mb-6">
         Explore plataformas parceiras e recursos educativos sobre saúde sexual, reprodutiva e higiene menstrual.
       </p>
