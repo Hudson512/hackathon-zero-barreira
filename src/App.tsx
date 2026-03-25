@@ -10,16 +10,34 @@ import {
 } from "lucide-react";
 
 export default function App() {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
+    script.onload = () => {
+      new (window as any).VLibras.Widget('https://vlibras.gov.br/app');
+    };
+    document.body.appendChild(script);
+  }, []);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/bracelet-sim" element={<BraceletSimulator />} />
-        <Route path="/aprender" element={<AprendizagemPage />} />
-        <Route path="/sala/:cursoId/:moduloIndex" element={<SalaDeAulaPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      {/* @ts-expect-error VLibras custom attributes */}
+      <div vw="true" className="enabled">
+        <div vw-access-button="true" className="active"></div>
+        <div vw-plugin-wrapper="true">
+          <div className="vw-plugin-top-wrapper"></div>
+        </div>
+      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/bracelet-sim" element={<BraceletSimulator />} />
+          <Route path="/aprender" element={<AprendizagemPage />} />
+          <Route path="/sala/:cursoId/:moduloIndex" element={<SalaDeAulaPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
