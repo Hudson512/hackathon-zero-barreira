@@ -319,29 +319,29 @@ function BraceletSimulator() {
   };
 
   return (
-    <div className="h-screen overflow-hidden bg-[#0A0A0B] text-white font-sans flex flex-col">
+    <div className="min-h-screen bg-[#0A0A0B] text-white font-sans flex flex-col">
       {/* Glow effect background */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-pink-500/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[800px] md:h-[600px] bg-pink-500/10 blur-[100px] rounded-full pointer-events-none" />
 
       {/* Top bar */}
-      <div className="relative z-10 flex justify-between items-center px-8 py-4 border-b border-white/5">
-        <div className="flex items-center gap-3">
+      <div className="relative z-10 flex justify-between items-center px-5 py-3 md:px-8 md:py-4 border-b border-white/5">
+        <div className="flex items-center gap-2">
           <motion.div animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-2 h-2 rounded-full bg-green-400" />
-          <span className="text-[10px] font-bold uppercase tracking-widest opacity-40">NDINGA OS v1.0 — Live Sync</span>
+          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest opacity-40">NDINGA OS v1.0 — Live Sync</span>
         </div>
-        <Link to="/" className="text-white/30 hover:text-white/70 transition-colors text-[10px] uppercase tracking-widest flex items-center gap-2">
+        <Link to="/" className="text-white/30 hover:text-white/70 transition-colors text-[9px] uppercase tracking-widest flex items-center gap-1.5">
           <ArrowRight className="w-3 h-3 rotate-180" /> Voltar ao Site
         </Link>
       </div>
 
-      {/* Main Grid */}
-      <div className="relative z-10 flex-1 grid grid-cols-3 gap-4 p-6 min-h-0">
+      {/* Main Grid — 1 col on mobile, 3 cols on desktop */}
+      <div className="relative z-10 flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 p-4 md:p-6">
 
         {/* === Card 1: Device Vitals === */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-zinc-900/60 backdrop-blur-3xl border border-white/10 rounded-[36px] p-6 flex flex-col items-center justify-between"
+          className="bg-zinc-900/60 backdrop-blur-3xl border border-white/10 rounded-[28px] md:rounded-[36px] p-5 md:p-6 flex flex-col items-center gap-4 md:justify-between"
         >
           <div className="w-full flex justify-between items-center text-[9px] font-bold uppercase tracking-widest opacity-30">
             <span>Sinais Vitais</span>
@@ -349,8 +349,8 @@ function BraceletSimulator() {
           </div>
 
           {/* Ring */}
-          <div className="relative w-44 h-44 flex items-center justify-center">
-            <svg className="absolute inset-0 w-full h-full -rotate-90">
+          <div className="relative w-36 h-36 md:w-44 md:h-44 flex items-center justify-center">
+            <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 176 176">
               <circle cx="88" cy="88" r="80" stroke="currentColor" strokeWidth="2" fill="transparent" className="text-white/5" />
               <motion.circle
                 cx="88" cy="88" r="80" stroke="currentColor" strokeWidth="7" fill="transparent"
@@ -363,27 +363,27 @@ function BraceletSimulator() {
               />
             </svg>
             <div className="text-center">
-              <motion.span key={temp} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-4xl font-serif font-black block">
+              <motion.span key={temp} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-3xl md:text-4xl font-serif font-black block">
                 {temp}°
               </motion.span>
-              <span className="text-[8px] font-bold uppercase tracking-[0.3em] opacity-40">Temp. Corporal</span>
+              <span className="text-[7px] md:text-[8px] font-bold uppercase tracking-[0.3em] opacity-40">Temp. Corporal</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 w-full">
+          <div className="grid grid-cols-2 gap-2 md:gap-3 w-full">
             <div className="bg-white/5 border border-white/5 p-3 rounded-2xl text-center">
               <Activity className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-              <span className="text-lg font-bold block">{pressure}</span>
+              <span className="text-base md:text-lg font-bold block">{pressure}</span>
               <span className="text-[7px] font-bold uppercase tracking-widest opacity-30">Pressão Art.</span>
             </div>
             <div className="bg-white/5 border border-white/5 p-3 rounded-2xl text-center">
               <Calendar className="w-4 h-4 text-pink-400 mx-auto mb-1" />
-              <span className="text-lg font-bold block">{day}º Dia</span>
+              <span className="text-base md:text-lg font-bold block">{day}º Dia</span>
               <span className="text-[7px] font-bold uppercase tracking-widest opacity-30">Ciclo</span>
             </div>
           </div>
 
-          <div className="w-full bg-pink-500/10 border border-pink-500/20 p-4 rounded-2xl flex gap-3 items-center">
+          <div className="w-full bg-pink-500/10 border border-pink-500/20 p-3 md:p-4 rounded-2xl flex gap-3 items-center">
             <div className="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center animate-pulse flex-shrink-0">
               <Heart className="w-3 h-3 text-white" />
             </div>
@@ -399,7 +399,7 @@ function BraceletSimulator() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className={`backdrop-blur-3xl border rounded-[36px] p-6 flex flex-col justify-between ${
+          className={`backdrop-blur-3xl border rounded-[28px] md:rounded-[36px] p-5 md:p-6 flex flex-col justify-between ${
             isUrgent ? "bg-red-900/30 border-red-500/30" : "bg-zinc-900/50 border-white/10"
           }`}
         >
@@ -419,17 +419,17 @@ function BraceletSimulator() {
           </div>
 
           {/* Big Countdown */}
-          <div className="text-center flex-1 flex flex-col items-center justify-center gap-2">
+          <div className="text-center flex-1 flex flex-col items-center justify-center gap-1 py-4">
             <motion.span
               key={`${hours}-${minutes}-${seconds}`}
-              className={`text-7xl font-serif font-black tracking-tight ${isUrgent ? "text-red-400" : "text-white"}`}
+              className={`text-5xl md:text-7xl font-serif font-black tracking-tight ${isUrgent ? "text-red-400" : "text-white"}`}
             >
               {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}
             </motion.span>
-            <span className={`text-4xl font-serif font-bold opacity-40 ${isUrgent ? "text-red-300" : ""}`}>
+            <span className={`text-2xl md:text-4xl font-serif font-bold opacity-40 ${isUrgent ? "text-red-300" : ""}`}>
               :{String(seconds).padStart(2, "0")}
             </span>
-            <p className="text-[9px] opacity-40 uppercase tracking-widest">Tempo Restante para Troca</p>
+            <p className="text-[9px] opacity-40 uppercase tracking-widest mt-1">Tempo Restante para Troca</p>
           </div>
 
           {/* Progress bar */}
