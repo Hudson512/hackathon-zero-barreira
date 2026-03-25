@@ -3,11 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from "react";
-import { motion } from "motion/react";
-import { ShoppingCart, ArrowRight, ChevronDown, ShieldCheck, Droplets, Leaf, Layers, Wind, Heart, Cpu, Zap, Radio, Bell, AlertTriangle } from "lucide-react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ShoppingCart, ArrowRight, ChevronDown, ShieldCheck, Droplets, Leaf, Layers, Wind, Heart, Cpu, Zap, Radio, Bell, AlertTriangle, X, Globe, MessageSquare, ExternalLink, Shield, BookOpen } from "lucide-react";
 
 export default function App() {
+  const [isPreOrderModalOpen, setIsPreOrderModalOpen] = useState(false);
+  const [isExploreModalOpen, setIsExploreModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#F5F5F7] text-[#1D1D1F] font-sans selection:bg-pink-100 scroll-smooth">
       {/* Navigation */}
@@ -64,12 +67,18 @@ export default function App() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-wrap gap-4"
           >
-            <button className="px-8 py-4 bg-black text-white rounded-full font-medium flex items-center gap-2 hover:scale-105 transition-transform group">
+            <button 
+              onClick={() => setIsPreOrderModalOpen(true)}
+              className="px-8 py-4 bg-black text-white rounded-full font-medium flex items-center gap-2 hover:scale-105 transition-transform group"
+            >
               Comprar Agora <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-            <a href="#tecnologia" className="px-8 py-4 bg-white border border-black/10 rounded-full font-medium flex items-center gap-2 hover:bg-gray-50 transition-colors">
+            <button 
+              onClick={() => setIsExploreModalOpen(true)}
+              className="px-8 py-4 bg-white border border-black/10 rounded-full font-medium flex items-center gap-2 hover:bg-gray-50 transition-colors"
+            >
               Explorar <ChevronDown className="w-4 h-4" />
-            </a>
+            </button>
           </motion.div>
         </div>
 
@@ -237,6 +246,145 @@ export default function App() {
           <span>Termos</span>
         </div>
       </footer>
+
+      {/* Modals */}
+      <AnimatePresence>
+        {isPreOrderModalOpen && (
+          <Modal onClose={() => setIsPreOrderModalOpen(false)} title="Compra Antecipada">
+            <PreOrderForm onSuccess={() => setIsPreOrderModalOpen(false)} />
+          </Modal>
+        )}
+        {isExploreModalOpen && (
+          <Modal onClose={() => setIsExploreModalOpen(false)} title="Plataforma de Aprendizagem">
+            <ExploreContent />
+          </Modal>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function Modal({ children, onClose, title }: { children: React.ReactNode, onClose: () => void, title: string }) {
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+      />
+      <motion.div 
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        className="relative bg-white w-full max-w-lg rounded-[32px] overflow-hidden shadow-2xl"
+      >
+        <div className="p-8 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+          <h3 className="text-2xl font-serif font-bold tracking-tight">{title}</h3>
+          <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full transition-colors">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="p-8">
+          {children}
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+function PreOrderForm({ onSuccess }: { onSuccess: () => void }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulating API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSent(true);
+      setTimeout(onSuccess, 2000);
+    }, 1500);
+  };
+
+  if (isSent) {
+    return (
+      <div className="text-center py-10">
+        <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+          <ShieldCheck className="w-10 h-10" />
+        </div>
+        <h4 className="text-2xl font-bold mb-2">Dados Enviados!</h4>
+        <p className="opacity-50">Entraremos em contacto com a sua empresa em breve.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <label className="block text-xs font-bold uppercase tracking-widest opacity-40 mb-2">Nome da Empresa</label>
+        <input required type="text" className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all" placeholder="Sua Empresa Lda" />
+      </div>
+      <div>
+        <label className="block text-xs font-bold uppercase tracking-widest opacity-40 mb-2">E-mail de Contacto</label>
+        <input required type="email" className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all" placeholder="contacto@empresa.com" />
+      </div>
+      <div>
+        <label className="block text-xs font-bold uppercase tracking-widest opacity-40 mb-2">Telemóvel / WhatsApp</label>
+        <input required type="tel" className="w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500 transition-all" placeholder="+244 ..." />
+      </div>
+      <button 
+        disabled={isSubmitting}
+        className="w-full py-5 bg-black text-white rounded-2xl font-bold hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2 group disabled:opacity-50"
+      >
+        {isSubmitting ? "Enviando..." : "Enviar Dados"} 
+        {!isSubmitting && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+      </button>
+    </form>
+  );
+}
+
+function ExploreContent() {
+  const platforms = [
+    { name: "Love Matters", url: "https://lovematters.in/en", desc: "Plataforma global sobre amor, sexo e relacionamentos.", icon: <Heart className="w-5 h-5" /> },
+    { name: "P&OP Desenvolvimento", url: "https://popdesenvolvimento.org/", desc: "Foco em desenvolvimento e saúde reprodutiva.", icon: <Globe className="w-5 h-5" /> },
+    { name: "FEMCONNECT", url: "https://femconnect.godaddysites.com/", desc: "Conectando mulheres a serviços de saúde essencial.", icon: <ShieldCheck className="w-5 h-5" /> },
+    { name: "PAT-MED (Saúde Sexual)", url: "https://pat-med.org/category/saude-sexual-reprodutiva/", desc: "Portal de medicina e saúde preventiva.", icon: <Shield className="w-5 h-5" /> },
+    { name: "Coalizão (Vibrações)", url: "https://www.coalizao.org.mz/vibracoes/", desc: "Iniciativa moçambicana para jovens.", icon: <MessageSquare className="w-5 h-5" /> },
+    { name: "SRHR Portfolio", url: "https://www.srhr.org/", desc: "Recursos internacionais sobre direitos sexuais.", icon: <BookOpen className="w-5 h-5" /> },
+    { name: "UNFPA Moçambique", url: "https://mozambique.unfpa.org/pt/what-we-do", desc: "Agência da ONU para saúde reprodutiva.", icon: <Globe className="w-5 h-5" /> },
+  ];
+
+  return (
+    <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+      <p className="text-sm opacity-60 leading-relaxed mb-6">
+        Explore plataformas parceiras e recursos educativos sobre saúde sexual, reprodutiva e higiene menstrual.
+      </p>
+
+      <div className="grid gap-3">
+        {platforms.map((p, i) => (
+          <a 
+            key={i}
+            href={p.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-between p-4 bg-gray-50 border border-gray-100 rounded-2xl hover:bg-pink-50 hover:border-pink-200 transition-all duration-300"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-gray-400 group-hover:text-pink-500 shadow-sm transition-colors">
+                {p.icon}
+              </div>
+              <div>
+                <h4 className="text-sm font-bold text-gray-900">{p.name}</h4>
+                <p className="text-[11px] opacity-50">{p.desc}</p>
+              </div>
+            </div>
+            <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 text-pink-500 -translate-x-2 group-hover:translate-x-0 transition-all" />
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
